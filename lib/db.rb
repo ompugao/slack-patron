@@ -4,6 +4,7 @@ config = YAML.load_file('./config.yml')
 
 db_config = config['database']
 db = Mongo::Client.new([ db_config['uri'] ], database: db_config['database'])
+Mongo::Logger.logger.level = Logger::WARN
 
 Users = db['users']
 Users.indexes.create_one({ :id => 1 }, :unique => true)
